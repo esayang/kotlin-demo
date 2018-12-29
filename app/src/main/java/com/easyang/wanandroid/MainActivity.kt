@@ -10,7 +10,7 @@ class MainActivity : BaseActivity() {
     }
 
     override fun initView() {
-        mBtn.setOnClickListener { v -> showToast("哈哈哈，惊不惊喜") }
+        mBtn.setOnClickListener { _ -> showToast("哈哈哈，惊不惊喜") }
     }
 
     override fun initData() {
