@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
  * @author SC16004984
  * @date 2018/12/29 0029.
  */
-public abstract class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,14 +17,14 @@ public abstract class BaseActivity : AppCompatActivity() {
         initData()
     }
 
-    public abstract fun getLayoutRes(): Int
+    abstract fun getLayoutRes(): Int
 
-    public abstract fun initView()
+    abstract fun initView()
 
-    public abstract fun initData()
+    abstract fun initData()
 
 
-    fun showToast(msg: String) {
+    fun showToast(msg: String): Unit {
         showToast(0, msg)
     }
 

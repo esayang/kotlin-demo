@@ -34,5 +34,23 @@ dependencies {
     api 'androidx.core:core-ktx:1.0.1'
     api 'androidx.appcompat:appcompat:1.0.2'
 
+    /**
+     * 网络请求库
+     */
+    api "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
+    api "com.squareup.retrofit2:adapter-rxjava2:$rootProject.rxjava2AdapterVersion"
+    api "com.squareup.retrofit2:converter-gson:$rootProject.gsonConverterVersion"
+    /**
+     * Reactive 异步库
+     */
+    api "io.reactivex.rxjava2:rxjava:$rootProject.rxjavaVersion"
+    api "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroidVersion"
+
+    /**
+     * Rxjava 异常处理
+     */
+    api "me.jessyan:rxerrorhandler:$rootProject.rxErrorHandlerVersion"
+
+
 
 }

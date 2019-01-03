@@ -1,6 +1,8 @@
-package com.easyang.wanandroid
+package com.easyang.wanandroid.ui
 
 import com.easyang.base.ui.BaseActivity
+import com.easyang.wanandroid.R
+import com.easyang.wanandroid.constant.Constant
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
@@ -10,9 +12,10 @@ class MainActivity : BaseActivity() {
     }
 
     override fun initView() {
-        mBtn.setOnClickListener { _ -> showToast("哈哈哈，惊不惊喜") }
+        mBtn.setOnClickListener { showToast("哈哈哈，惊不惊喜") }
     }
 
     override fun initData() {
+
     }
 }

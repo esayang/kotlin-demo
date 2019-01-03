@@ -25,3 +25,69 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+ext {
+    minSdkVersion = 16
+    targetSdkVersion = 26
+    compileSdkVersion = 26
+    buildToolsVersion = '26.0.2'
+
+    // App dependencies
+    supportLibraryVersion = '27.1.0'
+    guavaVersion = '23.0-android'
+    junitVersion = '4.12'
+    mockitoVersion = '1.10.19'
+    powerMockito = '1.6.2'
+    hamcrestVersion = '1.3'
+    runnerVersion = '1.0.1'
+    rulesVersion = '1.0.1'
+    espressoVersion = '3.0.1'
+    roomVersion = "1.0.0"
+    daggerVersion = '2.11'
+    dexmakerVersion = '1.2'
+
+    zxingCoreVersion = '3.3.0'
+    javaxAnnotationVersion = '10.0-b28'
+    glideVersion = '4.6.1'
+    commonUtilsVersion = '1.19.2'
+    greenDaoVersion = '3.2.2'
+    retrofitVersion = '2.3.0'
+    rxjavaVersion = '2.1.9'
+    rxandroidVersion = '2.0.2'
+    rxjava2AdapterVersion = '2.3.0'
+    gsonConverterVersion = '2.3.0'
+    rxErrorHandlerVersion = '2.1.0'
+    matisseVersion = '0.5.1'
+    flycoDialogVersion = '1.3.2@aar'
+    flycoRoundViewVersion = '1.1.4@aar'
+    flycoSystemBarVersion = '1.0.0@aar'
+    BRVAHVersion = '2.9.41'
+    arouterVersion = '1.3.1'
+    arouterCompilerVersion = '1.1.4'
+    multDexVersion = '1.0.3'
+    mosby3Version = '3.1.0'
+    rxbinding2Version = '2.1.1'
+    geniusVersion = '2.0.1'
+
+    rxlifecycleVersion = '2.2.1'
+    rxpermission = '0.9.5@aar'
+    viewanimatorVersion = '1.0.5'
+    AAVersion = "4.4.0"
+    jsonVersion = "v1.0.0"
+    tabLayoutVersion = "2.1.2@aar"
+    gsonVersion = "2.7"
+    blockcanaryAndroidVersion = "1.5.0"
+    leakcanaryAndroidVersion = "1.5.4"
+    agentwebVersion = "4.0.2"
+    jsbridgeVersion = "1.0.4"
+    SmartRefreshLayoutVersion = "1.0.5.1"
+    DragPhotoViewVersion = "1.0.1"
+    swipelayoutVersion = "1.2.0@aar"
+    androidJodaVersion = "2.9.9.4"
+    calendarviewVersion = "3.2.8"
+    LubanVersion = "1.1.8"
+    PickerViewVersion = "4.1.6"
+
+}
+
+
