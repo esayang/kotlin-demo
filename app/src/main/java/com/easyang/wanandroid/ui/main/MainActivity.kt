@@ -2,7 +2,7 @@ package com.easyang.wanandroid.ui.main
 
 import com.easyang.base.ui.BaseActivity
 import com.easyang.wanandroid.R
-import kotlinx.android.synthetic.main.toolbar.*
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity<MainContract.View, MainPresenter>(), MainContract.View {
     override fun createPresenter(): MainPresenter {
@@ -14,7 +14,9 @@ class MainActivity : BaseActivity<MainContract.View, MainPresenter>(), MainContr
     }
 
     override fun initView() {
-        tv_title.text = "首页"
+        title_bar.titleText = "首页"
+        
+
     }
 
     override fun initData() {

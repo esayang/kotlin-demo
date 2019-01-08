@@ -5,6 +5,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.main.MainActivity">
-    <include layout="@layout/toolbar"/>
+    <com.easyang.base.widget.TitleBar
+            android:id="@+id/title_bar"
+            android:layout_width="match_parent"
+            android:background="?attr/colorPrimary"
+            android:elevation="8dp"
+            android:layout_height="@dimen/toolbar_height"
+    />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
