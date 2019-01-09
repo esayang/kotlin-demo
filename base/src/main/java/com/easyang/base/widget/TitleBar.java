@@ -1,8 +1,9 @@
 package com.easyang.base.widget;
 
 import android.content.Context;
-import android.graphics.Bitmap;
+import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -18,24 +19,12 @@ import com.easyang.base.R;
  */
 public class TitleBar extends androidx.appcompat.widget.Toolbar {
 
-    /**
-     * 标题位置
-     */
-    private int titleTextGravity = Gravity.CENTER;
-    /**
-     * 0：无；   1：仅图标；  2:仅文字；  3:图标+文字
-     */
-    private int leftMode = 1;
-    /**
-     * * 0：无；   1：仅图标；   2：仅文字；  3:图标+文字
-     */
-    private int rightMode = 0;
 
     /**
      * 图标
      */
-    private Bitmap leftBitmap;
-    private Bitmap rightBitmap;
+    private Drawable leftDrawable;
+    private Drawable rightDrawable;
 
     /**
      * 文字内容
@@ -85,9 +74,48 @@ public class TitleBar extends androidx.appcompat.widget.Toolbar {
         setContentInsetsRelative(0, 0);
         setContentInsetsAbsolute(0, 0);
         createTitleBar(context);
+        TypedArray arr = context.obtainStyledAttributes(attrs, R.styleable.TitleBar);
 
+        titleText = arr.getString(R.styleable.TitleBar_tb_title_text);
+        titleSize = arr.getDimension(R.styleable.TitleBar_tb_title_text_size, 0);
+        if (titleSize == 0) {
+            titleSize = 16;
+        } else {
+            titleSize = px2dp(titleSize);
+        }
+        titleTextColor = arr.getColor(R.styleable.TitleBar_tb_title_text_color, titleTextColor);
+
+        leftText = arr.getString(R.styleable.TitleBar_tb_left_text);
+        leftTextSize = arr.getDimension(R.styleable.TitleBar_tb_left_text_size, 0);
+
+        if (leftTextSize == 0) {
+            leftTextSize = 14;
+        } else {
+            leftTextSize = px2dp(leftTextSize);
+        }
+
+        leftTextColor = arr.getColor(R.styleable.TitleBar_tb_left_text_color, leftTextColor);
+        int leftDrawableId = arr.getResourceId(R.styleable.TitleBar_tb_left_icon, R.drawable.iv_return_white);
+        if (leftDrawableId != 0) {
+            setLeftDrawable(getResources().getDrawable(leftDrawableId));
+
+        }
+
+        rightText = arr.getString(R.styleable.TitleBar_tb_right_text);
+        rightTextSize = arr.getDimension(R.styleable.TitleBar_tb_right_text_size, 0);
+        if (rightTextSize == 0) {
+            rightTextSize = 14;
+        } else {
+            rightTextSize = px2dp(rightTextSize);
+        }
+        rightTextColor = arr.getColor(R.styleable.TitleBar_tb_right_text_color, rightTextColor);
+        int rightDrawableId = arr.getResourceId(R.styleable.TitleBar_tb_right_icon, 0);
+        if (rightDrawableId != 0) {
+            setRightDrawable(getResources().getDrawable(rightDrawableId));
+        }
+
+        arr.recycle();
         init();
-
 
     }
 
@@ -122,6 +150,7 @@ public class TitleBar extends androidx.appcompat.widget.Toolbar {
         mRightView.setText(rightText);
         mRightView.setTextColor(rightTextColor);
         mRightView.setTextSize(rightTextSize);
+        mRightView.setCompoundDrawables(null, null, rightDrawable, null);
         mRightView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -139,6 +168,7 @@ public class TitleBar extends androidx.appcompat.widget.Toolbar {
         mLeftView.setText(leftText);
         mLeftView.setTextColor(leftTextColor);
         mLeftView.setTextSize(leftTextSize);
+        mRightView.setCompoundDrawables(leftDrawable, null, null, null);
         mLeftView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -157,7 +187,6 @@ public class TitleBar extends androidx.appcompat.widget.Toolbar {
         mTitleView.setText(titleText);
         mTitleView.setTextSize(titleSize);
         mTitleView.setTextColor(titleTextColor);
-        mTitleView.setGravity(titleTextGravity);
     }
 
 
@@ -179,52 +208,29 @@ public class TitleBar extends androidx.appcompat.widget.Toolbar {
         this.rightClickListener = rightClickListener;
     }
 
-    /**
-     * 标题文字位置
-     *
-     * @return
-     */
-    public int getTitleTextGravity() {
-        return titleTextGravity;
+
+    public Drawable getLeftDrawable() {
+        return leftDrawable;
     }
 
-    public void setTitleTextGravity(int titleTextGravity) {
-        if (mTitleView != null) {
-            mTitleView.setGravity(titleTextGravity);
+    public void setLeftDrawable(Drawable leftDrawable) {
+        leftDrawable.setBounds(0, 0, leftDrawable.getIntrinsicWidth(), leftDrawable.getIntrinsicHeight());
+        this.leftDrawable = leftDrawable;
+        if (mLeftView != null) {
+            mLeftView.setCompoundDrawables(leftDrawable, null, null, null);
         }
-        this.titleTextGravity = titleTextGravity;
     }
 
-    public int getLeftMode() {
-        return leftMode;
+    public Drawable getRightDrawable() {
+        return rightDrawable;
     }
 
-    public void setLeftMode(int leftMode) {
-        this.leftMode = leftMode;
-    }
-
-    public int getRightMode() {
-        return rightMode;
-    }
-
-    public void setRightMode(int rightMode) {
-        this.rightMode = rightMode;
-    }
-
-    public Bitmap getLeftBitmap() {
-        return leftBitmap;
-    }
-
-    public void setLeftBitmap(Bitmap leftBitmap) {
-        this.leftBitmap = leftBitmap;
-    }
-
-    public Bitmap getRightBitmap() {
-        return rightBitmap;
-    }
-
-    public void setRightBitmap(Bitmap rightBitmap) {
-        this.rightBitmap = rightBitmap;
+    public void setRightDrawable(Drawable rightDrawable) {
+        rightDrawable.setBounds(0, 0, rightDrawable.getIntrinsicWidth(), rightDrawable.getIntrinsicHeight());
+        this.rightDrawable = rightDrawable;
+        if (mRightView != null) {
+            mRightView.setCompoundDrawables(null, null, rightDrawable, null);
+        }
     }
 
     public String getLeftText() {
@@ -267,7 +273,6 @@ public class TitleBar extends androidx.appcompat.widget.Toolbar {
     @Override
     public void setTitleTextColor(int titleTextColor) {
         this.titleTextColor = titleTextColor;
-
         if (mTitleView != null) {
             mTitleView.setTextColor(titleTextColor);
         }
@@ -340,13 +345,19 @@ public class TitleBar extends androidx.appcompat.widget.Toolbar {
     public void setPadding(float paddingLeft, float paddingRight) {
         this.paddingLeft = paddingLeft;
         this.paddingRight = paddingRight;
-        mContentGroup.setPadding((int) paddingLeft, 0, (int) paddingRight, 0);
-
+        if (mContentGroup != null) {
+            mContentGroup.setPadding((int) paddingLeft, 0, (int) paddingRight, 0);
+        }
     }
 
 
     private float dp2px(int dp) {
         return (float) (getResources().getDisplayMetrics().density * dp + 0.5);
+    }
+
+    private int px2dp(float px) {
+        return (int) (px * 1.0F / getResources().getDisplayMetrics().density + 0.5);
+
     }
 
 }
