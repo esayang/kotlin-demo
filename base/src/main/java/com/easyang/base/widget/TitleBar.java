@@ -84,18 +84,57 @@ public class TitleBar extends androidx.appcompat.widget.Toolbar {
         super(context, attrs, defStyleAttr);
         setContentInsetsRelative(0, 0);
         setContentInsetsAbsolute(0, 0);
+        createTitleBar(context);
+
+        init();
+
+
+    }
+
+    /**
+     * 生成标题栏
+     *
+     * @param context
+     */
+    private void createTitleBar(Context context) {
         mContentGroup = (ConstraintLayout) LayoutInflater.from(context).inflate(R.layout.title_bar, null);
         addView(mContentGroup, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         mLeftView = mContentGroup.findViewById(R.id.tv_left);
         mTitleView = mContentGroup.findViewById(R.id.tv_title);
         mRightView = mContentGroup.findViewById(R.id.tv_right);
-
-        initTitleView();
-        initLeftView();
-
-
     }
 
+
+    /**
+     * 初始化标题栏属性
+     */
+    private void init() {
+        initTitleView();
+        initLeftView();
+        initRightView();
+    }
+
+
+    /**
+     * 初始化右视图
+     */
+    private void initRightView() {
+        mRightView.setText(rightText);
+        mRightView.setTextColor(rightTextColor);
+        mRightView.setTextSize(rightTextSize);
+        mRightView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (rightClickListener != null) {
+                    rightClickListener.onClick(view);
+                }
+            }
+        });
+    }
+
+    /**
+     * 初始化左视图
+     */
     private void initLeftView() {
         mLeftView.setText(leftText);
         mLeftView.setTextColor(leftTextColor);
@@ -110,22 +149,41 @@ public class TitleBar extends androidx.appcompat.widget.Toolbar {
         });
     }
 
+    /**
+     * 初始化标题
+     */
     private void initTitleView() {
         mTitleView.setSelected(true);
         mTitleView.setText(titleText);
         mTitleView.setTextSize(titleSize);
         mTitleView.setTextColor(titleTextColor);
+        mTitleView.setGravity(titleTextGravity);
     }
 
 
+    /**
+     * 左视图点击事件
+     *
+     * @param leftClickListener
+     */
     public void setLeftClickListener(OnClickListener leftClickListener) {
         this.leftClickListener = leftClickListener;
     }
 
+    /**
+     * 右视图点击事件
+     *
+     * @param rightClickListener
+     */
     public void setRightClickListener(OnClickListener rightClickListener) {
         this.rightClickListener = rightClickListener;
     }
 
+    /**
+     * 标题文字位置
+     *
+     * @return
+     */
     public int getTitleTextGravity() {
         return titleTextGravity;
     }
@@ -197,6 +255,9 @@ public class TitleBar extends androidx.appcompat.widget.Toolbar {
 
     public void setTitleText(String titleText) {
         this.titleText = titleText;
+        if (mTitleView != null) {
+            mTitleView.setText(titleText);
+        }
     }
 
     public int getTitleTextColor() {
@@ -206,6 +267,10 @@ public class TitleBar extends androidx.appcompat.widget.Toolbar {
     @Override
     public void setTitleTextColor(int titleTextColor) {
         this.titleTextColor = titleTextColor;
+
+        if (mTitleView != null) {
+            mTitleView.setTextColor(titleTextColor);
+        }
     }
 
     public int getLeftTextColor() {
@@ -214,6 +279,9 @@ public class TitleBar extends androidx.appcompat.widget.Toolbar {
 
     public void setLeftTextColor(int leftTextColor) {
         this.leftTextColor = leftTextColor;
+        if (mLeftView != null) {
+            mLeftView.setTextColor(leftTextColor);
+        }
     }
 
     public int getRightTextColor() {
@@ -222,6 +290,9 @@ public class TitleBar extends androidx.appcompat.widget.Toolbar {
 
     public void setRightTextColor(int rightTextColor) {
         this.rightTextColor = rightTextColor;
+        if (mRightView != null) {
+            mRightView.setTextColor(rightTextColor);
+        }
     }
 
     public float getTitleSize() {
@@ -261,17 +332,18 @@ public class TitleBar extends androidx.appcompat.widget.Toolbar {
         return paddingLeft;
     }
 
-    public void setPaddingLeft(float paddingLeft) {
-        this.paddingLeft = paddingLeft;
-    }
-
     public float getRightPadding() {
         return paddingRight;
     }
 
-    public void setPaddingRight(float paddingRight) {
+
+    public void setPadding(float paddingLeft, float paddingRight) {
+        this.paddingLeft = paddingLeft;
         this.paddingRight = paddingRight;
+        mContentGroup.setPadding((int) paddingLeft, 0, (int) paddingRight, 0);
+
     }
+
 
     private float dp2px(int dp) {
         return (float) (getResources().getDisplayMetrics().density * dp + 0.5);

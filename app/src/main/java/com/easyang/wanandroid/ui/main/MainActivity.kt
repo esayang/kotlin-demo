@@ -15,7 +15,7 @@ class MainActivity : BaseActivity<MainContract.View, MainPresenter>(), MainContr
 
     override fun initView() {
         title_bar.titleText = "首页"
-        
+
 
     }
 
