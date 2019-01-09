@@ -6,7 +6,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.easyang.base.BasePresenter
 import com.easyang.base.BaseView
+import com.easyang.base.R
 import com.easyang.base.net.exception.ErrorType
+import com.easyang.base.utils.statusbar.Eyes
 
 /**
  * @author SC16004984
@@ -18,6 +20,7 @@ abstract class BaseActivity<V : BaseView, P : BasePresenter<V>> : BaseView, AppC
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(getLayoutRes())
+        Eyes.setStatusBarColor(this, resources.getColor(R.color.colorPrimary))
         presenter = createPresenter()
         presenter.attach(this)
         initView()

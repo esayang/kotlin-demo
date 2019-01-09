@@ -33,6 +33,7 @@ dependencies {
     api 'com.android.support.test.espresso:espresso-core:3.0.2'
     api 'androidx.core:core-ktx:1.0.1'
     api 'androidx.appcompat:appcompat:1.0.2'
+    api 'com.google.android.material:material:1.0.0'
 
     /**
      * 网络请求库
@@ -50,7 +51,12 @@ dependencies {
      * Rxjava 异常处理
      */
     api "me.jessyan:rxerrorhandler:$rootProject.rxErrorHandlerVersion"
+    api 'com.youth.banner:banner:1.4.10'  //最新版本
 
-
+    api 'skin.support:skin-support:4.0.1'                   // skin-support
+    api 'skin.support:skin-support-appcompat:4.0.1'         // skin-support 基础控件支持
+    api 'skin.support:skin-support-design:4.0.1'            // skin-support-design material design 控件支持[可选]
+    api 'skin.support:skin-support-cardview:4.0.1'          // skin-support-cardview CardView 控件支持[可选]
+    api 'skin.support:skin-support-constraint-layout:4.0.1' // skin-support-constraint-layout ConstraintLayout 控件支持[可选]
 
 }
